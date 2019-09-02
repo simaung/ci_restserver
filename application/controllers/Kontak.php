@@ -1,11 +1,7 @@
 <?php
-use Restserver\Libraries\REST_Controller;
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require APPPATH . 'libraries/REST_Controller.php';
-require APPPATH . 'libraries/Format.php';
-
-class Kontak extends REST_Controller
+class Kontak extends Base_Controller
 {
     function __construct()
     {
@@ -29,12 +25,12 @@ class Kontak extends REST_Controller
             $this->response([
                 'status'    => TRUE,
                 'data'      => $kontak
-            ], REST_Controller::HTTP_OK);
+            ], parent::HTTP_OK);
         }else{
             $this->response([
                 'status'    => FALSE,
                 'message'   => 'kontak not found'
-            ], REST_Controller::HTTP_NOT_FOUND);
+            ], parent::HTTP_NOT_FOUND);
         }
     }
 
@@ -50,12 +46,12 @@ class Kontak extends REST_Controller
             $this->response([
                 'status'    => TRUE,
                 'message'   => 'kontak has success created'
-            ], REST_Controller::HTTP_CREATED);
+            ], parent::HTTP_CREATED);
         }else{
             $this->response([
                 'status'    => FALSE,
                 'message'   => 'kontak has failed created'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+            ], parent::HTTP_BAD_REQUEST);
         }
     }
 
@@ -72,12 +68,12 @@ class Kontak extends REST_Controller
             $this->response([
                 'status'    => TRUE,
                 'message'   => 'kontak has success updated'
-            ], REST_Controller::HTTP_NO_CONTENT);
+            ], parent::HTTP_NO_CONTENT);
         }else{
             $this->response([
                 'status'    => FALSE,
                 'message'   => 'kontak has failed updated'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+            ], parent::HTTP_BAD_REQUEST);
         }
     }
 
@@ -90,7 +86,7 @@ class Kontak extends REST_Controller
             $this->response([
                 'status'    => FALSE,
                 'message'   => 'provide in id!'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+            ], parent::HTTP_BAD_REQUEST);
         }else{
             if($this->kontak_model->deleteKontak($id) > 0)
             {
@@ -98,12 +94,12 @@ class Kontak extends REST_Controller
                     'status'    => TRUE,
                     'id'        => $id,
                     'message'   => 'id success deleted'
-                ], REST_Controller::HTTP_NO_CONTENT);
+                ], parent::HTTP_NO_CONTENT);
             }else{
                 $this->response([
                     'status'    => FALSE,
                     'message'   => 'kontak not found'
-                ], REST_Controller::HTTP_BAD_REQUEST);
+                ], parent::HTTP_BAD_REQUEST);
             }
         }
     }
